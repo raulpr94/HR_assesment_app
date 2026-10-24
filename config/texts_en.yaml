@@ -1,0 +1,446 @@
+# All user-facing text. Add texts_de.yaml with the same keys for a German version.
+# Placeholders use Python str.format syntax: {name}.
+
+app:
+  title: Performance Review
+  caption: Structured review cycle for every level
+
+nav:
+  overview: Overview
+  review: Review detail
+  guide: Process guide
+  dashboard: Dashboard
+  admin: Admin
+
+auth:
+  view_as: View as
+  view_as_help: Simulated login. Pick any employee to see the app through their eyes.
+  hr_badge: HR admin
+  no_employees: No employees yet. Run `python manage.py seed-demo` or import a CSV.
+  not_found: The selected employee no longer exists. Please pick another one.
+
+levels:
+  A: Employee
+  B: Line manager
+  C: Department manager
+
+status:
+  NOT_STARTED: Not started
+  INITIATED: Initiated
+  SELF_ASSESSMENT_SUBMITTED: Self-assessment submitted
+  MANAGER_ASSESSMENT_SUBMITTED: Manager assessment submitted
+  MEETING_SCHEDULED: Meeting scheduled
+  ACKNOWLEDGED: Partly acknowledged
+  COMPLETED: Completed
+
+actions:
+  initiate: Initiate review
+  submit_self: Submit self-assessment
+  submit_manager: Submit manager assessment
+  schedule_meeting: Schedule meeting
+  acknowledge: Confirm review was discussed
+  hr_advance: Move one step forward
+  hr_revert: Move one step back
+
+common:
+  access_denied: You don't have access to this page.
+  no_open_cycle: No review cycle is open yet. HR can open one with `python manage.py open-cycle --name "2026 Annual"`.
+  cycle_line: "Current cycle: **{name}** · {start} – {due}"
+  db_missing: The database was not found. Run the setup script (or `python manage.py init-db`) first.
+
+overview:
+  my_review: My review
+  my_team: My team
+  company: All reviews (HR)
+  not_reviewed: You are not reviewed in this cycle.
+  your_status: "Status: {status}"
+  team_summary: "{count} direct reports · {started} started · {completed} completed"
+  no_reports: No direct reports yet.
+  no_reviews_started: No reviews started yet. Tick **Initiate** to begin.
+  team_locked: Your own review must be completed before you can start reviews for your team. You can already see your team below.
+  team_help: Tick **Initiate** to start a review, or pick a **Meeting** date once the manager assessment is in. Only those two cells can be edited, and only when that is the next step. Then press **Save changes**.
+  open_review: Open review
+  table_help_title: How this table works
+
+review:
+  pick: Review
+  pick_help: Reviews you take part in come first.
+  none: No reviews to show yet. Reviews appear here once a manager has started them.
+  heading: "{reviewee} · reviewed by {reviewer}"
+  relation_reviewee: You are being reviewed.
+  relation_reviewer: You are the reviewer.
+  relation_hr: You are viewing this as HR.
+  relation_observer: You are viewing this as a manager higher up the reporting line.
+  meeting_line: "Meeting: {when}"
+  self_title: Self-assessment
+  manager_title: Manager assessment
+  self_heading: "Self-assessment · {name}"
+  manager_heading: "Manager assessment · {name}"
+  draft_badge: Draft (not submitted)
+  submitted_badge: Submitted
+  not_answered: "—"
+  comment_label: Comment (optional)
+  required_mark: "*"
+  required_note: "* required"
+  save_draft: Save draft
+  submit: Submit…
+  draft_saved: Draft saved.
+  incomplete: "Please answer these before submitting: {questions}"
+  confirm_submit_self: "**Submit your self-assessment for {name}.** After submitting you can't change your answers. {reviewer} is told it's ready."
+  confirm_submit_manager: "**Submit your manager assessment for {name}.** After submitting you can't change your answers. Next you'll schedule the review meeting."
+  submit_label_self: Submit self-assessment
+  submit_label_manager: Submit manager assessment
+  submitted_self: Self-assessment submitted.
+  submitted_manager: Manager assessment submitted.
+  hidden_not_submitted: Not submitted yet.
+  no_answers: No answers recorded.
+  hidden_reveal_later: "Visible from the meeting date ({date})."
+  hidden_reveal_unscheduled: Visible once the review meeting has taken place.
+  hidden_participants_only: Answers are visible only to the two participants and HR.
+  compare_title: Both sides
+  your_answers: Your answers
+  waiting_self: "{name} hasn't submitted the self-assessment yet. You can fill in your side once it's in."
+  ack_title: Confirm the discussion
+  ack_checkbox: I confirm this review was discussed
+  ack_comment: Your comment (optional)
+  ack_comment_help: Visible to your manager and HR.
+  ack_button: Confirm
+  ack_done: "{name} confirmed on {date}."
+  ack_pending: "{name} hasn't confirmed yet."
+  ack_saved: Thank you, your confirmation is saved.
+  ack_not_yet: "You can confirm from the meeting date ({date})."
+  comments: Comments
+  history: History (HR)
+  history_empty: No changes recorded yet.
+  history_columns:
+    timestamp: When
+    actor_id: Who
+    action: Action
+    field_changed: Field
+    old_value: Before
+    new_value: After
+    reason: Reason
+  schedule_hint: The meeting date is set in the team table on the Overview page.
+
+admin:
+  tab_cycles: Cycles
+  tab_employees: Employees
+  tab_audit: Audit log
+  tab_outbox: Notifications
+  # cycles
+  cycles_title: Review cycles
+  no_cycles: No cycles yet. Open the first one below.
+  col_name: Name
+  col_start: Start
+  col_due: Due
+  col_status: Status
+  col_started: Started
+  col_completed: Completed
+  status_open: Open
+  status_closed: Closed
+  open_title: Open a new cycle
+  open_blocked: "Close \"{name}\" before opening a new cycle (only one cycle is open at a time)."
+  cycle_name: Name
+  cycle_name_placeholder: e.g. 2026 Annual
+  start: Start date
+  due: Due date
+  open_button: Open cycle…
+  confirm_open: "**Open the cycle \"{name}\" ({start} – {due}).** All department managers get an email that the cycle has started."
+  opened: "Cycle \"{name}\" opened."
+  close_title: Close the open cycle
+  close_help: Closing stops new reviews and normal steps in that cycle. HR overrides still work.
+  close_button: Close cycle…
+  confirm_close: "**Close the cycle \"{name}\".** Nobody can start or continue reviews in it any more; only HR overrides remain possible."
+  closed: "Cycle \"{name}\" closed."
+  # employees
+  employees_title: Employee hierarchy
+  employees_count: "{total} active employees · HR {hr} · C {c} · B {b} · A {a}"
+  upload: Upload employees.csv
+  upload_help: "Columns: employee_id, name, email, level, role_title, department, manager_id, is_hr_admin. Comma or semicolon separated."
+  template: Download CSV template
+  export: Download current employees
+  valid: "The file is valid: {count} employees. Nothing has been imported yet."
+  invalid: "{count} problem(s) found. Fix them in the file and upload it again; nothing was imported."
+  issue_row: Row
+  issue_id: Employee
+  issue_field: Column
+  issue_message: Problem
+  import_button: Import…
+  confirm_import: "**Import {count} employees from {file}.** Existing people are updated by employee_id; active people missing from the file are deactivated (their reviews remain)."
+  imported: "Import done: {new} new, {updated} updated, {deactivated} deactivated."
+  # audit
+  audit_title: Audit log
+  audit_actions: Actions
+  audit_actor: Who
+  audit_anyone: Anyone
+  audit_review: Review id (0 = all)
+  audit_limit: Show up to
+  audit_empty: No entries match.
+  audit_download: Download as CSV
+  # outbox
+  outbox_title: Notification outbox
+  mode_dry_run: "Mode: **dry run**. Messages are only logged and marked *skipped*; no email leaves the app."
+  mode_zapier: "Mode: **Zapier**. Processing sends each message to the configured webhook."
+  process: Process pending now
+  process_zapier: Send pending now…
+  retry: Retry failed…
+  confirm_send: "**Send {count} pending message(s) to Zapier.** They will be emailed to the recipients."
+  confirm_retry: "**Re-queue failed messages and send all pending ones.**"
+  processed: "Processed {count} message(s): {details}."
+  nothing_pending: No pending messages.
+  outbox_filter: Status
+  outbox_all: All
+  outbox_empty: The outbox is empty.
+  col_id: "#"
+  col_type: Type
+  col_to: To
+  col_subject: Subject
+  col_attempts: Tries
+  col_created: Queued
+  col_sent: Sent
+  col_error: Last error
+  preview: Message
+  preview_body: Body
+  preview_payload: Payload sent to Zapier
+  status_pending: pending
+  status_sent: sent
+  status_failed: failed
+  status_skipped: skipped
+
+guide:
+  intro: "This page explains the review cycle from your point of view ({role})."
+  steps_title: The six steps
+  col_step: Step
+  col_who: Who
+  col_what: What happens
+  step_rows:
+    - ["1 · Start", "Manager", "The manager ticks **Initiate** for you in the team table. You get an email."]
+    - ["2 · Self-assessment", "Employee", "You answer the survey. Save drafts as often as you like; after **Submit** your answers are locked."]
+    - ["3 · Manager assessment", "Manager", "The manager reads your self-assessment and answers the same questions. Also locked after submitting."]
+    - ["4 · Meeting", "Manager", "The manager picks a date within the cycle. Both get a calendar invite; it can be moved until it happens."]
+    - ["5 · Confirmations", "Both", "From the meeting date you both see both sides. Each confirms the review was discussed; the employee can add a comment."]
+    - ["6 · Completed", "Automatic", "When both have confirmed, the review is complete and you both get a thank-you email."]
+  cycle_line: "Current cycle **{name}**: {start} – {due}."
+  reviewee_title: Your own review
+  reviewee: |
+    - **Wait for the start.** Your manager starts your review; you'll get an email and a button on the Overview page.
+    - **Take your time with the self-assessment.** Rate each area from 1 to 5 and write a few honest sentences on strengths, development areas and goals. Use **Save draft** and come back later.
+    - **Submitting is final.** Once you submit, your answers are locked. Your manager sees them only after you submit, never your drafts.
+    - **Your manager's view.** You'll see your manager's assessment next to yours from the day of the meeting, so you can talk about both.
+    - **After the meeting** tick *I confirm this review was discussed* and, if you like, add a comment for your manager and HR.
+  manager_title: Reviewing your team
+  manager: |
+    - **Start each review** by ticking **Initiate** in the *My team* table on the Overview page, then **Save changes**.
+    - **Wait for the self-assessment.** You'll get an email when it's in. You can't see drafts.
+    - **Write your assessment** on the Review page: the self-assessment is shown next to your form. Save drafts; submit when done (it's then locked).
+    - **Schedule the meeting** by picking a date and time in the *Meeting* column. It must be in the future and within the cycle; you can move it until it takes place.
+    - **After the meeting** both of you confirm on the Review page; the second confirmation completes the review.
+  line_manager_note: "**As a line manager**, you can start your team's reviews only once your own review is completed. Until then the *Initiate* column stays locked."
+  timeline_title: Suggested timeline
+  timeline_intro: "A steady pace that leaves time for meetings before the due date. These are suggestions, not hard deadlines."
+  col_by: Aim to finish by
+  timeline_steps:
+    initiate: All reviews started
+    submit_self: Self-assessments submitted
+    submit_manager: Manager assessments submitted
+    schedule_meeting: Meetings scheduled
+    acknowledge: Meetings held and confirmed
+  department_note: "**As a department manager** you review your line managers first: their own reviews must be completed before they can start reviews for their teams. The **Dashboard** shows progress across your whole department."
+  hr_title: HR tasks
+  hr: |
+    - **Open the cycle** on the Admin page (department managers are notified) and close it at the end.
+    - **Keep the hierarchy current** by uploading the employee CSV; every problem is listed before anything is imported.
+    - **Follow progress** on the Dashboard and in *All reviews* on the Overview page, with filters.
+    - **Fix mistakes** with an override: move a review one step forward or back. A reason is required and logged; going back unlocks the matching answers.
+    - **Notifications** are queued in the outbox; send them from the Admin page (dry run until Zapier is configured).
+  privacy_title: Who sees what
+  privacy: |
+    - Your manager sees your self-assessment only after you submit it.
+    - You see your manager's assessment from the meeting date.
+    - Managers higher up see the progress of reviews in their area, not the answers. The Dashboard shows averages only for groups of at least {min} answers.
+    - HR sees everything. Nobody sees reviews outside their own reporting line.
+
+dashboard:
+  scope_company: Company-wide figures
+  scope_tree: Figures for your reporting area
+  team: Team
+  all_teams: All teams
+  completion: Completion
+  completion_help: Completed reviews out of everyone who is reviewed in this cycle.
+  completed_of: "{done} of {total} completed"
+  in_progress: In progress
+  not_started: Not started
+  due: Due date
+  days_left: "{days} days left"
+  due_today: Due today
+  days_over: "{days} days overdue"
+  status_title: Reviews per status
+  overdue_title: Overdue reviews
+  overdue_none: Nothing is overdue.
+  overdue_not_yet: "Nothing can be overdue before the due date ({due})."
+  col_employee: Employee
+  col_manager: Manager
+  col_status: Status
+  col_days: Days overdue
+  ratings_title: Average rating per question, self vs. manager
+  ratings_help: "Only submitted answers count. Averages based on fewer than {min} answers are hidden to protect individuals."
+  ratings_none: Not enough submitted answers yet to show averages.
+  col_question: Question
+  col_self: Self
+  col_manager_avg: Manager
+  col_n_self: "Self (n)"
+  col_n_manager: "Manager (n)"
+  hidden: hidden (n < {min})
+  teams_title: Teams
+  col_team: Team of
+  col_size: People
+  col_started: Started
+  col_completed: Completed
+  col_rate: Completion
+  col_overdue: Overdue
+  empty: Nobody in this area is reviewed in this cycle.
+
+# Short labels for the progress stepper (one per step)
+steps:
+  NOT_STARTED: Not started
+  INITIATED: Started
+  SELF_ASSESSMENT_SUBMITTED: Self-assessment
+  MANAGER_ASSESSMENT_SUBMITTED: Manager assessment
+  MEETING_SCHEDULED: Meeting
+  ACKNOWLEDGED: Confirmations
+  COMPLETED: Completed
+  done: done
+  current: current
+  todo: to do
+
+# "What's next" for the person looking at their own review
+next_mine:
+  NOT_STARTED: "{manager} hasn't started your review yet. You'll get an email when they do."
+  act_submit_self: Complete your self-assessment
+  SELF_ASSESSMENT_SUBMITTED: "{manager} is now completing their assessment."
+  MANAGER_ASSESSMENT_SUBMITTED: "{manager} will schedule your review meeting."
+  meeting: "Your review meeting is on {date} at {time}. After the meeting, you'll both confirm it took place."
+  act_acknowledge: Confirm the review was discussed
+  wait_other: "Waiting for {manager} to confirm the review was discussed."
+  done: Your review is complete. Thank you for taking part!
+
+# "Next step" column of the writeback table
+next_table:
+  you: You
+  manager: Manager
+  employee: Employee
+  both: Both
+  initiate: tick Initiate
+  locked: locked until manager's own review is completed
+  submit_self: self-assessment
+  submit_manager: manager assessment
+  schedule_meeting: set meeting date
+  acknowledge: confirm discussion
+  meeting: "meeting on {date}"
+  done: done
+
+table:
+  name: Name
+  role: Role
+  department: Department
+  level: Level
+  manager: Manager
+  status: Status
+  next: Next step
+  initiate: Initiate
+  initiated: Started
+  self_submitted: Self-assessment
+  manager_submitted: Manager assessment
+  meeting: Meeting
+  reviewee_ack: Employee confirmed
+  reviewer_ack: Manager confirmed
+  completed: Completed
+  initiate_help: Tick to start the review. Editable only while the review is not started.
+  meeting_help: Date and time of the review meeting (local time). Editable once the manager assessment is in, until the meeting takes place.
+  save: Save changes
+  discard: Discard changes
+  pending: "{count} change(s) ready to save."
+  rejected_title: "These edits can't be saved:"
+  reject_uninitiate: "{name}: a started review can't be un-ticked here. HR can move it back if needed."
+  reject_initiate: "{name}: the review can't be started right now ({reason})."
+  reject_meeting: "{name}: the meeting date can't be changed at this step."
+  reject_meeting_cleared: "{name}: a meeting date can't be removed; pick a new date instead."
+  reason_status: "status: {status}"
+  reason_locked: the manager's own review isn't completed
+
+confirm:
+  title: Please confirm
+  intro: "You're about to make these changes:"
+  initiate: "**Start the review for {name}.** {name} gets an email asking for their self-assessment."
+  schedule_meeting: "**Set the meeting with {name} to {when}.** You both get a calendar invite."
+  reschedule_meeting: "**Move the meeting with {name} to {when}.** You both get an updated calendar invite."
+  confirm: Confirm
+  cancel: Cancel
+  saved: "{name}: {action} saved."
+  failed: "{name}: {message}"
+
+hr:
+  filters: Filters
+  department: Department
+  level: Level
+  status: Status
+  manager: Manager
+  showing: "Showing {shown} of {total} employees."
+  no_match: No employees match these filters.
+  overrides: HR override
+  override_help: Move one review a step forward or back. A reason is required and is written to the audit log.
+  pick_review: Review
+  no_started: No started reviews in the current selection.
+  direction: Direction
+  forward: One step forward
+  back: One step back
+  reason: Reason
+  reason_placeholder: Why is this override needed?
+  apply: Apply override…
+  preview_forward: "This moves the review of **{name}** from *{old}* to *{new}*."
+  preview_back: "This moves the review of **{name}** back from *{old}* to *{new}*."
+  preview_cleared: "Cleared: {fields}."
+  preview_unlocked: "Answers unlocked again: {sides}."
+  preview_deleted: The review row is removed, so the employee is back to *Not started*. The audit log keeps the history.
+  preview_notifications: "Emails queued: {count}."
+  side_self: self-assessment
+  side_manager: manager assessment
+  done: "Override applied: {name} is now *{status}*."
+
+# Domain errors. Keys match core.errors.ErrorCode values.
+errors:
+  unknown_employee: Employee {employee_id} was not found.
+  employee_inactive: "{name} is no longer active."
+  review_not_found: Review {review_id} was not found.
+  cycle_not_found: Review cycle {cycle_id} was not found.
+  no_open_cycle: There is no open review cycle.
+  cycle_closed: The review cycle "{cycle}" is closed.
+  cycle_already_open: Close the open cycle "{cycle}" before opening a new one.
+  cycle_invalid_dates: The due date must be on or after the start date.
+  cycle_name_taken: A cycle named "{name}" already exists.
+  cycle_name_required: Please give the cycle a name.
+  invalid_transition: "This step is not possible right now (status: {status})."
+  already_initiated: This review has already been initiated.
+  not_reviewable: "{name} is not reviewed in this cycle."
+  no_manager: "{name} has no manager, so nobody can review them."
+  not_direct_manager: You can only start reviews for your own direct reports.
+  own_review_not_completed: Your own review must be completed before you can start reviews for your team.
+  not_reviewee: Only the person being reviewed can do this.
+  not_reviewer: Only the reviewing manager can do this.
+  not_a_party: Only the reviewer or the reviewee can do this.
+  answers_incomplete: "Please answer all required questions first ({missing})."
+  answers_invalid: "Some answers are not valid: {details}"
+  answers_locked: These answers have been submitted and can no longer be changed.
+  cannot_edit_answers: You can't edit these answers at this step.
+  meeting_required: Please choose a meeting date and time.
+  meeting_in_past: The meeting must be in the future.
+  meeting_outside_cycle: The meeting must be between {start} and {due}.
+  meeting_already_held: The meeting has already taken place and can't be moved.
+  meeting_not_yet_reached: You can confirm from the meeting date ({date}) onward.
+  already_acknowledged: You have already confirmed this review.
+  hr_only: Only HR can do this.
+  reason_required: Please give a reason for the override.
+  inconsistent_row: Review {review_id} has steps filled out of order ({detail}).
+  missing_payload: "Missing information: {field}."
+  review_hidden: You don't have access to this review.
+  page_forbidden: You don't have access to this page.

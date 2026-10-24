@@ -1,0 +1,22 @@
+Subject: {% if rescheduled %}Rescheduled: {% endif %}Performance review meeting – {{ reviewee.name }} – {{ meeting.date }} {{ meeting.time }}
+Hello {{ recipient.first_name }},
+
+{% if rescheduled %}
+The performance review meeting has been moved. New details:
+{% else %}
+A performance review meeting has been scheduled.
+{% endif %}
+
+Date:         {{ meeting.date }}
+Time:         {{ meeting.time }} ({{ meeting.timezone }}), {{ meeting.duration_minutes }} minutes
+Participants: {{ reviewer.name }} (reviewer), {{ reviewee.name }} (reviewee)
+Cycle:        {{ cycle.name }}
+
+{% if is_reviewer %}
+From the meeting date, you'll both see both sides of the review in the app.
+{% else %}
+From the meeting date, you'll see your manager's assessment next to your own in the app.
+{% endif %}
+After the meeting, each of you confirms that the review was discussed.
+
+{{ review_url }}

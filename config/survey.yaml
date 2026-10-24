@@ -1,0 +1,65 @@
+# Standard performance review survey.
+# Reviewee (self-assessment) and reviewer (manager assessment) answer the same questions.
+#
+# Changing questions: bump `version`, and copy the previous file into
+# config/survey_archive/<old version>.yaml so older reviews stay readable.
+version: "2026.1"
+title: Annual performance review
+
+scale:
+  min: 1
+  max: 5
+  labels:
+    1: Below expectations
+    2: Partly meets expectations
+    3: Meets expectations
+    4: Exceeds expectations
+    5: Outstanding
+
+questions:
+  - id: goals
+    text: Achievement of goals and objectives
+    type: rating
+    required: true
+    comment: true          # adds an optional free-text comment next to the rating
+    help: How well were the agreed goals for this period met?
+
+  - id: quality
+    text: Quality and accuracy of work
+    type: rating
+    required: true
+
+  - id: collaboration
+    text: Collaboration and teamwork
+    type: rating
+    required: true
+
+  - id: communication
+    text: Communication
+    type: rating
+    required: true
+
+  - id: initiative
+    text: Initiative and problem-solving
+    type: rating
+    required: true
+
+  - id: strengths
+    text: Key strengths
+    type: text
+    required: true
+
+  - id: development
+    text: Areas for development
+    type: text
+    required: true
+
+  - id: next_goals
+    text: Goals for the next period
+    type: text
+    required: true
+
+  - id: overall
+    text: Overall performance rating
+    type: rating
+    required: true

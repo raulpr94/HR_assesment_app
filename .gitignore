@@ -1,0 +1,22 @@
+# Environments and secrets
+.venv/
+venv/
+.env
+.streamlit/secrets.toml
+
+# Local data (keep the folder)
+data/*
+!data/.gitkeep
+
+# Python / tooling caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

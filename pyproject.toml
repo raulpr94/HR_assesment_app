@@ -1,0 +1,23 @@
+[project]
+name = "perf-review"
+version = "0.1.0"
+description = "Performance Review Assistant (Python + Streamlit)"
+requires-python = ">=3.10"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = [".venv", "data"]
+
+[tool.ruff.lint]
+# E/W/F: pycodestyle + pyflakes, I: import order, UP: modern syntax, B: bugbear,
+# SIM: simplifications, BLE: no blind `except Exception`, T20: no print().
+select = ["E", "W", "F", "I", "UP", "B", "SIM", "BLE", "T20"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["config", "core", "db", "services", "ui"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

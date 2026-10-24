@@ -1,0 +1,14 @@
+# Runtime
+streamlit>=1.40,<2
+SQLAlchemy>=2.0,<3
+PyYAML>=6.0
+Jinja2>=3.1
+python-dotenv>=1.0
+requests>=2.31
+pandas>=2.0
+# Time zone database (needed on Windows, where the OS has no IANA zones)
+tzdata>=2024.1
+
+# Development
+pytest>=8.0
+ruff>=0.6
